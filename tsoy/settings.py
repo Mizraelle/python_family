@@ -25,8 +25,7 @@ SECRET_KEY = '0vr-eqn_o0q#7&w@79$+po!uf!bt^s!&kz36j^t1mnug4w5(u#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['asyncio.pythonanywhere.com']
-
+ALLOWED_HOSTS = ['asyncio.pythonanywhere.com', '127.0.0.1']
 
 # Application definition
 
