@@ -1,0 +1,43 @@
+{% extends 'main_template.html' %}
+{% load staticfiles %}
+
+{% block index %}
+
+{% for v in videos %}
+<img class="label-info" id="like{{ v.id }}" src="{% static 'like.png' %}" width="30px"><h3 id="digit{{ v.id }}">{{ v.likes_video }}</h3>
+    <a href="/video/{{ v.slug }}"><h1>{{ v.name_video }}</h1></a>
+    <iframe width="853" height="480" src="{{ v.url_video }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    {% for c in comments %}
+        {% if c.video_id == v.id %}
+            <h2>{{ c.text }}</h2>
+        {% endif %}
+    {% endfor %}
+{% endfor %}
+
+<form action="/video/form/" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="usr">Name:</label>
+      <input type="text" class="form-control" id="usr" name="name">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input type="password" class="form-control" id="pwd" name="password">
+    </div>
+    <button type="submit" class="btn btn-primary">Primary</button>
+</form>
+
+<script>
+    $('document').ready( function(){
+        $('img.label-info').on('click', function () {
+            var id = $(this).attr('id');
+            $.ajax({url:'/video/add_like/',
+                    data:{'id':id},
+                    success: function (data) {
+                        $('#digit' + id.slice(4)).html(data)
+                    }});
+            console.log($(this).attr('id'))
+        })
+    })
+</script>
+{% endblock %}

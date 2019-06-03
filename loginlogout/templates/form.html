@@ -1,0 +1,15 @@
+{% extends 'main_template.html' %}
+{% load staticfiles %}
+
+{% block form %}
+
+<form action="/log/in/" method="post">
+    {% csrf_token %}
+    <label>login</label>
+    <input name="login" type="text"><br>
+    <label>password</label>
+    <input name="password" type="password"><br>
+
+    <input type="submit" value="submit">
+</form>
+{% endblock %}
